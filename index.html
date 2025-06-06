@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Voucher Wine Night</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #1a0d0d;
+      color: #f5f5f5;
+      font-family: 'Georgia', serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #d4af37;
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 0.8em;
+      max-width: 90%;
+    }
+
+    input[type="date"] {
+      padding: 0.8em;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 1em;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1em;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      background-color: #d4af37;
+      color: #1a0d0d;
+      border: none;
+      padding: 0.8em 1.5em;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #b8962f;
+    }
+
+    #confirmacao {
+      margin-top: 1.5em;
+      font-size: 1.2em;
+      color: #a3ffa3;
+      max-width: 90%;
+    }
+
+    .zap-link {
+      margin-top: 1em;
+      display: inline-block;
+      color: #f5f5f5;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>LET'S (wine) PARTY 🍷❄️</h1>
+  <p>Vitor Hugo, você foi selecionado para usufruir do combo mais Hot&Style desse friozinho. A Wine Night!</p>
+
+  <p>
+    🧦 Meia + chinelo!<br>
+    🍷 Vinho (branco, rosé ou um tinto, pra pintar um clima)<br>
+    🎶 Música de qualidade duvidosa<br>
+    🧀 Petiscos selecionados com critério zero<br>
+    😏 Umas cositas más... 
+  </p>
+
+  <p><strong>Validade do voucher:  Até o estoque de vinho acabar</strong><br>
+  Dresscode opcional, dependendo do teor alcoólico</p>
+
+  <p>📅 Escolha sua data para degustação:</p>
+  <input type="date" id="data-evento"><br>
+
+  <div class="buttons">
+    <button onclick="confirmarPresenca()">Confirmar presença</button>
+    <button onclick="recusarConvite()">Não poderei ir</button>
+  </div>
+
+  <div id="confirmacao"></div>
+
+  <script>
+    function confirmarPresenca() {
+      const data = document.getElementById('data-evento').value;
+      const confirmacao = document.getElementById('confirmacao');
+      if (data) {
+        const [ano, mes, dia] = data.split("-");
+        const codigo = "WINE-12369-VITOR";
+        const numero = "5519994108637";
+        const mensagem = `Olá! Meu código de confirmação para a Wine Night é ${codigo}. Data escolhida: ${dia}/${mes}/${ano}`;
+        const urlZap = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+        confirmacao.innerHTML = `
+          Excelente escolha, Vitor Hugo! Sua alma foi tocada pelo espírito da Wine Night.<br>
+          Seu código de confirmação é: <strong>${codigo}</strong><br><br>
+          Envie o código direto no Zap clicando aqui: 
+          <a class="zap-link" href="${urlZap}" target="_blank">(19) 99410-8637</a><br>
+          <br>Data escolhida: <strong>${dia}/${mes}/${ano}</strong>
+        `;
+      } else {
+        confirmacao.textContent = 'Por favor, selecione uma data para confirmar.';
+      }
+    }
+
+    function recusarConvite() {
+      const confirmacao = document.getElementById('confirmacao');
+      confirmacao.innerHTML = `
+        Gotas de vinho foram derramadas. Sua ausência será sentida... mais pelo vinho do que pela anfitriã, claro. 😢<br><br>
+        Se bater o arrependimento, chama no Zap pra reverter a tragédia: 
+        <a class="zap-link" href="https://wa.me/5519994108637" target="_blank">(19) 99410-8637</a>
+      `;
+    }
+  </script>
+</body>
+</html>
